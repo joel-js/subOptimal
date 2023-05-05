@@ -91,7 +91,7 @@ const App = () => {
     const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
     console.log(boxMesh)
     const sphereGeometry = new THREE.SphereGeometry(10, 10, 10);
-    const sphereMaterial = new THREE.MeshPhongMaterial({ wireframe: true });
+    const sphereMaterial = new THREE.MeshPhongMaterial({ wireframe: false });
     const sphereMesh = new THREE.Mesh(sphereGeometry, sphereMaterial);
     sphereMesh.position.x = 30;
     
@@ -113,6 +113,9 @@ const App = () => {
     materialFolder.add(sphereMesh.material, 'wireframe');
     materialFolder.addColor(materialParams, 'sphereColor')
                   .onChange((val) => sphereMesh.material.color.set(val));
+    
+    const lightFolder = folder.addFolder('lighting');
+    lightFolder.add()
 
   }, []);
 

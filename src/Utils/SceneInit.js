@@ -50,6 +50,7 @@ export default class SceneInit {
 
     this.clock = new THREE.Clock();
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    this.controls.maxPolarAngle = Math.PI / 2.1
     this.stats = Stats();
     document.body.appendChild(this.stats.dom);
 
