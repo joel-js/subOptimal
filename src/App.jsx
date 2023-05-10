@@ -88,11 +88,8 @@ const App = () => {
     
     
     const boxGeometry = new THREE.BoxGeometry(10, 10, 10);
-    const right_side = new THREE.MeshBasicMaterial({ map: loader.load('../src/assets/dice_1.png') }); //right side
-    right_side.color.set(0xffffff);
     const materials = [
-      // new THREE.MeshBasicMaterial({ map: loader.load('../src/assets/dice_1.png') }), //right side
-      right_side,
+      new THREE.MeshBasicMaterial({ map: loader.load('../src/assets/dice_1.png') }), //right side,
       new THREE.MeshBasicMaterial({ map: loader.load('../src/assets/dice_2.png')}), //left side
       new THREE.MeshBasicMaterial({ map: loader.load('../src/assets/dice_3.png')}), //top side
       new THREE.MeshBasicMaterial({ map: loader.load('../src/assets/dice_4.png')}), //bottom side
