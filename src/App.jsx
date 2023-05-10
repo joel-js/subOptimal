@@ -73,49 +73,63 @@
 import React from 'react';
 
 import * as THREE from 'three';
-import { GUI } from 'dat.gui';
+// import { GUI } from 'dat.gui';
 
 import SceneInit from './Utils/SceneInit';
+import ThreeBox from './Components/ThreeBox';
 
 const App = () => {
   React.useEffect(() => {
-    const test = new SceneInit('Canvas');
-    const gui = new GUI();
+    const canvas = new SceneInit('Canvas');
+    // const gui = new GUI();
     
-    test.initialize();
-    test.animate();
-    
-    
-    const boxGeometry = new THREE.BoxGeometry(8, 8, 8, 2, 2, 2);
-    const boxMaterial = new THREE.MeshPhongMaterial({ color: 0xff0000, wireframe: true });
-    const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
-    console.log(boxMesh)
-    const sphereGeometry = new THREE.SphereGeometry(10, 10, 10);
-    const sphereMaterial = new THREE.MeshPhongMaterial({ wireframe: false });
-    const sphereMesh = new THREE.Mesh(sphereGeometry, sphereMaterial);
-    sphereMesh.position.x = 30;
-    
-    test.scene.add(boxMesh);
-    test.scene.add(sphereMesh);
-    
-    const folder = gui.addFolder('Mesh');
-    folder.open();
+    canvas.initialize();
+    canvas.animate();
 
-    const rotationFolder = folder.addFolder('Rotation');
-    rotationFolder.add(boxMesh.rotation, 'x', 0, 5).name('Rotate X');
-    rotationFolder.add(boxMesh.rotation, 'y', 0, 5).name('Rotate Y');
-    rotationFolder.add(boxMesh.rotation, 'z', 0, 5).name('Rotate Z');
+    const mainGroup = new THREE.Group();
+    mainGroup.position.y = 0.5;
+    canvas.scene.add(mainGroup);
 
-    const materialFolder = folder.addFolder('Material');
-    const materialParams = {
-      sphereColor: sphereMesh.material.color.getHex()
-    }
-    materialFolder.add(sphereMesh.material, 'wireframe');
-    materialFolder.addColor(materialParams, 'sphereColor')
-                  .onChange((val) => sphereMesh.material.color.set(val));
-    
-    const lightFolder = folder.addFolder('lighting');
-    lightFolder.add()
+    const groundGeometry = new THREE.BoxGeometry(8, 0.5, 8);
+    const groundMaterial = new THREE.MeshPhongMaterial({ color: 0xfafafa });
+    const groundMesh = new THREE.Mesh(groundGeometry, groundMaterial);
+
+    groundMesh.receiveShadow = true;
+    groundMesh.position.y = -2;
+    mainGroup.add(groundMesh);
+
+    const redBoxMesh = ThreeBox({
+      geometry : [1, 1, 1],
+      material : {
+        material: 'MeshPhongMaterial',
+        props: { color: 0xff0000 }
+      },
+      shadow: true,
+      position: { x: -2 }
+    });
+    mainGroup.add(redBoxMesh);
+
+    const blueBoxMesh = ThreeBox({
+      geometry : [1, 1, 1],
+      material : {
+        material: 'MeshPhongMaterial',
+        props: { color: 0x0000ff }
+      },
+      shadow: true,
+      position: { x: 0 }
+    });
+    mainGroup.add(blueBoxMesh);
+
+    const greenBoxMesh = ThreeBox({
+      geometry : [1, 1, 1],
+      material : {
+        material: 'MeshPhongMaterial',
+        props: { color: 0x00ff00 }
+      },
+      shadow: true,
+      position: { x: 2 }
+    });
+    mainGroup.add(greenBoxMesh);
 
   }, []);
 

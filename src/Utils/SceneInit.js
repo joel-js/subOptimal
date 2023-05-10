@@ -33,9 +33,9 @@ export default class SceneInit {
       this.nearPlane,
       this.farPlane
     );
-    this.camera.position.z = 48;
-    this.camera.position.y = 48;
-    this.camera.position.x = 48;
+    this.camera.position.z = 10;
+    this.camera.position.y = 10;
+    this.camera.position.x = 10;
 
     // Specify a canvas which is already created in the HTML.
     const canvas = document.getElementById(this.canvasId);
