@@ -73,22 +73,31 @@
 import React from 'react';
 
 import * as THREE from 'three';
-import { GUI } from 'dat.gui';
+// import { GUI } from 'dat.gui';
 
 import SceneInit from './Utils/SceneInit';
 
 const App = () => {
   React.useEffect(() => {
     const test = new SceneInit('Canvas');
-    const gui = new GUI();
-    
+    // const gui = new GUI();
+    const loader = new THREE.TextureLoader();
+
     test.initialize();
     test.animate();
     
     
-    const boxGeometry = new THREE.BoxGeometry(8, 8, 8, 2, 2, 2);
-    const boxMaterial = new THREE.MeshPhongMaterial({ color: 0xff0000, wireframe: true });
-    const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
+    const boxGeometry = new THREE.BoxGeometry(10, 10, 10);
+    const materials = [
+      new THREE.MeshStandaradMaterial({ map: loader.load('../src/assets/dice_1.png') }), //right side
+      new THREE.MeshStandaradMaterial({ map: loader.load('../src/assets/dice_2.png')}), //left side
+      new THREE.MeshStandaradMaterial({ map: loader.load('../src/assets/dice_3.png')}), //top side
+      new THREE.MeshStandaradMaterial({ map: loader.load('../src/assets/dice_4.png')}), //bottom side
+      new THREE.MeshStandaradMaterial({ map: loader.load('../src/assets/dice_5.png')}), //front side
+      new THREE.MeshStandaradMaterial({ map: loader.load('../src/assets/dice_6.png')}), //back side
+    ];
+    // const boxMaterial = new THREE.MeshPhongMaterial({ color: 0xff0000, wireframe: true });
+    const boxMesh = new THREE.Mesh(boxGeometry, materials);
     console.log(boxMesh)
     const sphereGeometry = new THREE.SphereGeometry(10, 10, 10);
     const sphereMaterial = new THREE.MeshPhongMaterial({ wireframe: false });
@@ -98,24 +107,24 @@ const App = () => {
     test.scene.add(boxMesh);
     test.scene.add(sphereMesh);
     
-    const folder = gui.addFolder('Mesh');
-    folder.open();
+    // const folder = gui.addFolder('Mesh');
+    // folder.open();
 
-    const rotationFolder = folder.addFolder('Rotation');
-    rotationFolder.add(boxMesh.rotation, 'x', 0, 5).name('Rotate X');
-    rotationFolder.add(boxMesh.rotation, 'y', 0, 5).name('Rotate Y');
-    rotationFolder.add(boxMesh.rotation, 'z', 0, 5).name('Rotate Z');
+    // const rotationFolder = folder.addFolder('Rotation');
+    // rotationFolder.add(boxMesh.rotation, 'x', 0, 5).name('Rotate X');
+    // rotationFolder.add(boxMesh.rotation, 'y', 0, 5).name('Rotate Y');
+    // rotationFolder.add(boxMesh.rotation, 'z', 0, 5).name('Rotate Z');
 
-    const materialFolder = folder.addFolder('Material');
-    const materialParams = {
-      sphereColor: sphereMesh.material.color.getHex()
-    }
-    materialFolder.add(sphereMesh.material, 'wireframe');
-    materialFolder.addColor(materialParams, 'sphereColor')
-                  .onChange((val) => sphereMesh.material.color.set(val));
+    // const materialFolder = folder.addFolder('Material');
+    // const materialParams = {
+    //   sphereColor: sphereMesh.material.color.getHex()
+    // }
+    // materialFolder.add(sphereMesh.material, 'wireframe');
+    // materialFolder.addColor(materialParams, 'sphereColor')
+    //               .onChange((val) => sphereMesh.material.color.set(val));
     
-    const lightFolder = folder.addFolder('lighting');
-    lightFolder.add()
+    // const lightFolder = folder.addFolder('lighting');
+    // lightFolder.add()
 
   }, []);
 
