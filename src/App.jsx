@@ -88,16 +88,19 @@ const App = () => {
     
     
     const boxGeometry = new THREE.BoxGeometry(10, 10, 10);
+    const right_side = new THREE.MeshBasicMaterial({ map: loader.load('../src/assets/dice_1.png') }); //right side
+    right_side.color.set(0xffffff);
     const materials = [
-      new THREE.MeshStandaradMaterial({ map: loader.load('../src/assets/dice_1.png') }), //right side
-      new THREE.MeshStandaradMaterial({ map: loader.load('../src/assets/dice_2.png')}), //left side
-      new THREE.MeshStandaradMaterial({ map: loader.load('../src/assets/dice_3.png')}), //top side
-      new THREE.MeshStandaradMaterial({ map: loader.load('../src/assets/dice_4.png')}), //bottom side
-      new THREE.MeshStandaradMaterial({ map: loader.load('../src/assets/dice_5.png')}), //front side
-      new THREE.MeshStandaradMaterial({ map: loader.load('../src/assets/dice_6.png')}), //back side
+      // new THREE.MeshBasicMaterial({ map: loader.load('../src/assets/dice_1.png') }), //right side
+      right_side,
+      new THREE.MeshBasicMaterial({ map: loader.load('../src/assets/dice_2.png')}), //left side
+      new THREE.MeshBasicMaterial({ map: loader.load('../src/assets/dice_3.png')}), //top side
+      new THREE.MeshBasicMaterial({ map: loader.load('../src/assets/dice_4.png')}), //bottom side
+      new THREE.MeshBasicMaterial({ map: loader.load('../src/assets/dice_5.png')}), //front side
+      new THREE.MeshBasicMaterial({ map: loader.load('../src/assets/dice_6.png')}), //back side
     ];
     // const boxMaterial = new THREE.MeshPhongMaterial({ color: 0xff0000, wireframe: true });
-    const boxMesh = new THREE.Mesh(boxGeometry, materials);
+    const boxMesh = new THREE.Mesh(boxGeometry, materials); //right side
     console.log(boxMesh)
     const sphereGeometry = new THREE.SphereGeometry(10, 10, 10);
     const sphereMaterial = new THREE.MeshPhongMaterial({ wireframe: false });
