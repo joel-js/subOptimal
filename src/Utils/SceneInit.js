@@ -57,14 +57,18 @@ export default class SceneInit {
 
     // ambient light which is for the whole scene
     this.ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-    this.ambientLight.castShadow = true;
     this.scene.add(this.ambientLight);
 
-    // directional light - parallel sun rays
+    // // directional light - parallel sun rays
     this.directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-    // this.directionalLight.castShadow = true;
-    this.directionalLight.position.set(0, 32, 64);
+    this.directionalLight.position.set(10, 60, 10);
+    this.directionalLight.target.position.set(0,0,0);
+    this.directionalLight.castShadow = true;
     this.scene.add(this.directionalLight);
+    this.scene.add(this.directionalLight.target);
+
+    this.hemisphereLight = new THREE.HemisphereLight(0xffff00, 0x0000ff);
+    // this.scene.add(this.hemisphereLight);
 
     // if window resizes
     window.addEventListener('resize', () => this.onWindowResize(), false);
