@@ -73,50 +73,48 @@
 import React from 'react';
 
 import * as THREE from 'three';
-import { GUI } from 'dat.gui';
-
+// import { GUI } from 'dat.gui';
+// import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { PLYLoader } from 'three/examples/jsm/loaders/PLYLoader';
 import SceneInit from './Utils/SceneInit';
 
 const App = () => {
   React.useEffect(() => {
     const test = new SceneInit('Canvas');
-    const gui = new GUI();
     
     test.initialize();
     test.animate();
     
-    
-    const boxGeometry = new THREE.BoxGeometry(8, 8, 8, 2, 2, 2);
-    const boxMaterial = new THREE.MeshPhongMaterial({ color: 0xff0000, wireframe: true });
-    const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
-    console.log(boxMesh)
-    const sphereGeometry = new THREE.SphereGeometry(10, 10, 10);
-    const sphereMaterial = new THREE.MeshPhongMaterial({ wireframe: false });
-    const sphereMesh = new THREE.Mesh(sphereGeometry, sphereMaterial);
-    sphereMesh.position.x = 30;
-    
-    test.scene.add(boxMesh);
-    test.scene.add(sphereMesh);
-    
-    const folder = gui.addFolder('Mesh');
-    folder.open();
+    let loadedModel;
+    // const glftLoader = new GLTFLoader();
+    const plyLoader = new PLYLoader();
+  
 
-    const rotationFolder = folder.addFolder('Rotation');
-    rotationFolder.add(boxMesh.rotation, 'x', 0, 5).name('Rotate X');
-    rotationFolder.add(boxMesh.rotation, 'y', 0, 5).name('Rotate Y');
-    rotationFolder.add(boxMesh.rotation, 'z', 0, 5).name('Rotate Z');
+    plyLoader.load('../assets/CHENET_Susan_Bell_2nd_mandibular.ply', (geometry) => {
+			geometry.computeVertexNormals();
+      const material = new THREE.MeshStandardMaterial( { color: 0x0055ff, flatShading: true , side: THREE.DoubleSide } );
+      const mesh = new THREE.Mesh( geometry, material );
 
-    const materialFolder = folder.addFolder('Material');
-    const materialParams = {
-      sphereColor: sphereMesh.material.color.getHex()
-    }
-    materialFolder.add(sphereMesh.material, 'wireframe');
-    materialFolder.addColor(materialParams, 'sphereColor')
-                  .onChange((val) => sphereMesh.material.color.set(val));
-    
-    const lightFolder = folder.addFolder('lighting');
-    lightFolder.add()
+      mesh.position.y = 20;
+      mesh.position.z = 0;
+      mesh.position.x = 0;
+      // mesh.rotation.x = - Math.PI / 2;
+      mesh.scale.multiplyScalar( 1 );
 
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+
+      test.scene.add(mesh);
+    });
+    const animate = () => {
+      if (loadedModel) {
+        // loadedModel.scene.rotation.x += 0.01;
+        // loadedModel.scene.rotation.y += 0.01;
+        // loadedModel.scene.rotation.z += 0.01;
+      }
+      requestAnimationFrame(animate);
+    };
+    animate();
   }, []);
 
   return (
@@ -124,6 +122,6 @@ const App = () => {
       <canvas id="Canvas" />
     </div>
   );
-}
+};
 
 export default App;

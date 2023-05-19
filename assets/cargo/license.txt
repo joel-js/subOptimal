@@ -1,0 +1,11 @@
+Model Information:
+* title:	Sea cargo container - LegendaryGameDev
+* source:	https://sketchfab.com/3d-models/sea-cargo-container-legendarygamedev-dec32c3dcc984ee79f914ebcd51bed44
+* author:	ryan_dymon (https://sketchfab.com/rayndemon)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Sea cargo container - LegendaryGameDev" (https://sketchfab.com/3d-models/sea-cargo-container-legendarygamedev-dec32c3dcc984ee79f914ebcd51bed44) by ryan_dymon (https://sketchfab.com/rayndemon) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

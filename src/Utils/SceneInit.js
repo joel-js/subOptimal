@@ -33,9 +33,9 @@ export default class SceneInit {
       this.nearPlane,
       this.farPlane
     );
-    this.camera.position.z = 48;
-    this.camera.position.y = 48;
-    this.camera.position.x = 48;
+    this.camera.position.z = 50;
+    this.camera.position.y = 50;
+    this.camera.position.x = 0;
 
     // Specify a canvas which is already created in the HTML.
     const canvas = document.getElementById(this.canvasId);
@@ -43,6 +43,7 @@ export default class SceneInit {
       canvas,
       // Anti-aliasing smooths out the edges.
       antialias: true,
+      // alpha: true
     });
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     // this.renderer.shadowMap.enabled = true;
@@ -50,7 +51,7 @@ export default class SceneInit {
 
     this.clock = new THREE.Clock();
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-    this.controls.maxPolarAngle = Math.PI / 2.1
+    // this.controls.maxPolarAngle =    
     this.stats = Stats();
     document.body.appendChild(this.stats.dom);
 
